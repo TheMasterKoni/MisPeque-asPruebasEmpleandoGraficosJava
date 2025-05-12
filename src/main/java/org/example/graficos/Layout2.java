@@ -30,23 +30,28 @@ class PanelCalculadora extends JPanel{
         display.setEnabled(false);//PASO4:inhabilitamos el la accion de poder hacer click en el boton con este metodo nuevo
         add(display,BorderLayout.NORTH);//PASO3:añadimos display al panel y le asignamos us ubicacion
         //NOVEDAD ⬇️
-        JPanel miLamina2=new JPanel();
-        miLamina2.setLayout(new GridLayout(4,4));//PASO5:creamos instancia de JPanel, y le asignamos el GridLayout
-        JButton boton1=new JButton("1");
-        miLamina2.add(boton1);//PASO6;creamos los botones y lo añadimos a la lamina 2
-        JButton boton2=new JButton("2");
-        miLamina2.add(boton2);
-        JButton boton3=new JButton("3");
-        miLamina2.add(boton3);
-        JButton boton4=new JButton("4");
-        miLamina2.add(boton4);
-        JButton boton5=new JButton("5");
-        miLamina2.add(boton5);
-        add(miLamina2,BorderLayout.CENTER);//PASO7:añadimos la nueva lamina al marco*/
+       miLamina2=new JPanel();
+       miLamina2.setLayout(new GridLayout(4,4));
+       add(miLamina2,BorderLayout.CENTER);
+
+       ponerBotones("7");
+        ponerBotones("6");
+        ponerBotones("5");
+        ponerBotones("4");
+        ponerBotones("3");
+        ponerBotones("2");
+        ponerBotones("1");
+        ponerBotones("0");
+
+        ponerBotones("-");
+        ponerBotones("+");
+        ponerBotones("*");
+        ponerBotones("%");
+
     }
     private void ponerBotones(String rotulo){
         JButton boton=new JButton(rotulo);
-       this.MiLamina2.add(boton);
+       this.miLamina2.add(boton);
     }
-    private  JPanel MiLamina2;
+    private  JPanel miLamina2;
 }
