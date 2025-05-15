@@ -48,3 +48,4 @@ public class Componentes1Texto {
         private JButton boton1;
         JTextField campo1;
     }
+//codigo antes de hacerlo una verificación de Gmail
