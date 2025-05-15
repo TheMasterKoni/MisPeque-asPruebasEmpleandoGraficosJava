@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 //3.)y en la zona central tenga una segunda lamina la cual dividiremos para dar la forma a la calculadora (con GridLayout)
 //4.)en la rejilla creada en la segunda lamina, unbicar los botones de la calculadora
 //5.)agragar la clase que sera nuestro oyente mas la los numeros ser capturados por el display
+//6.)añadir funcionalidad a los botones (la mas compleja)
 public class Layout2 {
     public static void main(String[] args) {
         MarcoCalculadora miMarco=new MarcoCalculadora();
@@ -39,8 +40,12 @@ class PanelCalculadora extends JPanel{
        add(miLamina2,BorderLayout.CENTER);
 
        ActionListener insertar=new InsertarNumero();
+       ActionListener insertatOperacion=new GestionEventosOperacionesMatematicas();
 
-       ponerBotones("7",insertar);
+        //nuemros del 0-9
+        ponerBotones("9",insertar);
+        ponerBotones("8",insertar);
+        ponerBotones("7",insertar);
         ponerBotones("6",insertar);
         ponerBotones("5",insertar);
         ponerBotones("4",insertar);
@@ -50,12 +55,15 @@ class PanelCalculadora extends JPanel{
         ponerBotones("0",insertar);
         ponerBotones(".",insertar);
 
-      /*  ponerBotones("-");
-        ponerBotones("+");
-        ponerBotones("*");
-        ponerBotones("%");
-        ponerBotones("Cl");*/
+        //operaciones matematicas
+        ponerBotones("+",insertatOperacion);
+        ponerBotones("*",insertatOperacion);
+        ponerBotones("-",insertatOperacion);
+        ponerBotones("/",insertatOperacion);
+        ponerBotones("=",insertatOperacion);
 
+        add(miLamina2,BorderLayout.CENTER);
+        ultimaOperacion="=";
     }
     private void ponerBotones(String rotulo,ActionListener oyente){
         JButton boton=new JButton(rotulo);
@@ -74,7 +82,35 @@ class PanelCalculadora extends JPanel{
             display.setText(display.getText() + entrada);//getText nos permite optener el texto anterior y setText modificarlo
         }
     }
+    private class GestionEventosOperacionesMatematicas implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String operaciones=e.getActionCommand();
+            principio=true;//con esto al pulsar un tipo de dato Gestion..., el campo de clase principio borrara los numeros del
+            // display
+            ultimaOperacion=operaciones;
+            calcular(Double.parseDouble(display.getText()));
+
+        }
+        public void calcular(double x){
+            if (ultimaOperacion.equals("+")){
+                resultado+=x;
+            } else if (ultimaOperacion.equals("-")) {
+                resultado-=x;
+            } else if (ultimaOperacion.equals("=")) {
+                resultado=x;
+            } else if (ultimaOperacion.equals("*")) {
+                resultado*=x;
+            }
+            else if (ultimaOperacion.equals("/")) {
+                resultado/=x;
+            }
+            display.setText(""+resultado);//las comillas tambien nos convierten el double en String
+        }
+    }
     private  JPanel miLamina2;
     private JButton display;
     private boolean principio=true;
+    private double resultado;//campo de clase que nos permitira acceder/guardar las operaciones que vamos realizando
+    private String ultimaOperacion;
 }
