@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 //2.)Utilizaremos un boton para dar el display(porque segun el curso aun no estoy listo)
 //3.)y en la zona central tenga una segunda lamina la cual dividiremos para dar la forma a la calculadora (con GridLayout)
 //4.)en la rejilla creada en la segunda lamina, unbicar los botones de la calculadora
+//5.)agragar la clase que sera nuestro oyente mas la los numeros ser capturados por el display
 public class Layout2 {
     public static void main(String[] args) {
         MarcoCalculadora miMarco=new MarcoCalculadora();
