@@ -82,3 +82,4 @@ public class Componentes1Texto {
         private JTextField campo1;
         private JLabel resultado;
     }
+//codigo antes de hacerlo una verificación de Gmail
