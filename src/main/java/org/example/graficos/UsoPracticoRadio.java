@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//version 1
 //NOTA: ESTA ES LA SEGUNDA VERSION MAS SIMPLIFICADA DEL PROJECTO, LA VERSION INICIAL ESTA EN OTRA RAMA LLAMADA
 //"versiones_antes_de_la_practiva"
 
