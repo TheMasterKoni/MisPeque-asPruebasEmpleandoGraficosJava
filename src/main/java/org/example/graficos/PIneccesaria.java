@@ -7,55 +7,79 @@ import java.awt.event.ActionListener;
 
 public class PIneccesaria {
     public static void main(String[] args) {
-        MarcoInecesario miMarco=new MarcoInecesario();
+        MarcoInecesario miMarco = new MarcoInecesario();
         miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 }
-class MarcoInecesario extends JFrame{
-    public MarcoInecesario(){
-        setBounds(400,250,600,500);
-        PanelInecesario miPanel=new PanelInecesario();
+
+class MarcoInecesario extends JFrame {
+    public MarcoInecesario() {
+        setTitle("Adivina el Número");
+        setBounds(400, 250, 600, 500);
+        PanelInecesario miPanel = new PanelInecesario();
         add(miPanel);
         setVisible(true);
     }
 }
-class PanelInecesario extends JPanel{
-    public PanelInecesario(){
 
-       setLayout(new BorderLayout());
-       JPanel subPanel=new JPanel();
-       subPanel.setLayout(new FlowLayout());
+class PanelInecesario extends JPanel {
 
-       JLabel txt=new JLabel("intenta adivinar el numero");
-       mayorMenor=new JLabel("",JLabel.CENTER);
-       subPanel.add(txt);
+    public PanelInecesario() {
+        setLayout(new BorderLayout());
 
-       numero=new JTextField(20);
-       subPanel.add(numero);
-       add(mayorMenor,BorderLayout.CENTER);
+        // Panel superior
+        JPanel subPanel = new JPanel(new FlowLayout());
 
-       adivinar=new JButton("adivinar");
-       adivinar.addActionListener(new OyenteInnecesario());
-       subPanel.add(adivinar);
+        JLabel txt = new JLabel("Intenta adivinar el número (1-100):");
+        subPanel.add(txt);
 
-       add(subPanel,BorderLayout.NORTH);
+        numero = new JTextField(10);
+        subPanel.add(numero);
+
+        adivinar = new JButton("Adivinar");
+        adivinar.addActionListener(new OyenteInnecesario());
+        subPanel.add(adivinar);
+
+        add(subPanel, BorderLayout.NORTH);
+
+        // Mensaje de resultado en el centro
+        mayorMenor = new JLabel(" ", JLabel.CENTER);
+        mayorMenor.setFont(new Font("Arial", Font.BOLD, 18));
+        add(mayorMenor, BorderLayout.CENTER);
+
+        // Inicializa el número aleatorio
+        generarNuevoNumero();
     }
-    class OyenteInnecesario implements ActionListener{
+
+    class OyenteInnecesario implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int numValue=Integer.valueOf(numero.getText());
-            System.out.println(numValue);
+            try {
+                int numValue = Integer.parseInt(numero.getText());
 
-            if (ramdon<numValue){
-                mayorMenor.setText("el numero es menor");
-            } else if (ramdon>numValue){
-                mayorMenor.setText("el numero es mayor");
+                if (numValue > ramdon) {
+                    mayorMenor.setText("El número es más bajo");
+                } else if (numValue < ramdon) {
+                    mayorMenor.setText("El número es más alto");
+                } else {
+                    mayorMenor.setText("¡Correcto! Se ha generado un nuevo número.");
+                    generarNuevoNumero(); // Reinicia el juego
+                }
+
+            } catch (NumberFormatException ex) {
+                mayorMenor.setText("Por favor, ingresa un número válido.");
             }
+
+            numero.setText(""); // Limpia el campo de texto
         }
     }
-    JTextField numero;
-    int ramdon;
-    JLabel mayorMenor;
-    JButton adivinar;
+
+    private void generarNuevoNumero() {
+        ramdon = (int) (Math.random() * 100 + 1);
+    }
+
+    private JTextField numero;
+    private int ramdon;
+    private JLabel mayorMenor;
+    private JButton adivinar;
 }
