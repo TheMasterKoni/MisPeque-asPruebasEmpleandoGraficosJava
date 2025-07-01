@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 //4.)en la rejilla creada en la segunda lamina, unbicar los botones de la calculadora
 //5.)agragar la clase que sera nuestro oyente mas la los numeros ser capturados por el display
 //6.)añadir funcionalidad a los botones (la mas compleja)
-public class Layout2 {
+public class CalculadoGridLayout {
     public static void main(String[] args) {
         MarcoCalculadora miMarco=new MarcoCalculadora();
         miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
