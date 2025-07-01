@@ -8,20 +8,20 @@ y en ADICION, UTILIZAMOS POR PRIMERA VES, LAS CLASES INTERNAS ANONIMAS(NO NOMBRE
  */
 public class Video99ComponenteSpinner {
     public static void main(String[] args) {
-        MarcoSpinner miMarco=new MarcoSpinner();
+        MP miMarco=new MP();
         miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
-class MarcoSpinner extends JFrame{
-    public MarcoSpinner(){
+class MP extends JFrame{
+    public MP(){
         setBounds(400,250,500,400);
         PanelSpinner miPanel=new PanelSpinner();
         add(miPanel);
         setVisible(true);
     }
 }
-class PanelSpinner extends JPanel{
-    public PanelSpinner(){
+class P extends JPanel{
+    public P(){
         String[] tipoLetra=GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         //  JSpinner spinner=new JSpinner(new SpinnerDateModel());crear spinner de tipo fecha
         JSpinner spinner=new JSpinner(new SpinnerListModel(tipoLetra));
