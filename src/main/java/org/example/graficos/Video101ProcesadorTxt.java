@@ -33,19 +33,50 @@ class PanelProcesador extends JPanel{
         estilo=new JMenu("Estilo");
         tamagno=new JMenu("Tamaño");
 
-        configuraMenu("arial","Fuente","Arial",9,10);
-        configuraMenu("courier","Fuente","Courier",9,10);
-        configuraMenu("verdana","Fuente","Verdana",9,10);
+        configuraMenu("arial","Fuente","Arial",9,10,"");
+        configuraMenu("courier","Fuente","Courier",9,10,"");
+        configuraMenu("verdana","Fuente","Verdana",9,10,"");
         //----------------------------------------------------------------------
 
-        configuraMenu("Negrita","Estilo","",Font.BOLD,10);
-        configuraMenu("Cursiva","Estilo","",Font.ITALIC,10);
+       // configuraMenu("Negrita","Estilo","",Font.BOLD,10,"rojo.jpg");
+        //configuraMenu("Cursiva","Estilo","",Font.ITALIC,10,"Azul.jpg");
+
+        JCheckBoxMenuItem negrita=new JCheckBoxMenuItem("negrita",new ImageIcon("main/java/org/example/graficos/grial.jpg"));
+        JCheckBoxMenuItem cursica=new JCheckBoxMenuItem("Cursiva",new ImageIcon("main/java/org/example/graficos/saber.jpg"));
+
+        negrita.addActionListener(new StyledEditorKit.BoldAction());
+        cursica.addActionListener(new StyledEditorKit.ItalicAction());
+
+        estilo.add(negrita);
+        estilo.add(cursica);
         //----------------------------------------------------------------------
         //valor 9 no coresponde a nada valor 1 corresponder a negrita
-        configuraMenu("12","Tamaño","",9,12);
-        configuraMenu("16","Tamaño","",9,16);
-        configuraMenu("20","Tamaño","",9,20);
-        configuraMenu("24","Tamaño","",9,24);
+       /* configuraMenu("12","Tamaño","",9,12,"");
+        configuraMenu("16","Tamaño","",9,16,"");
+        configuraMenu("20","Tamaño","",9,20,"");
+        configuraMenu("24","Tamaño","",9,24,"");*/
+
+        ButtonGroup grupoTamagno=new ButtonGroup();
+
+        JRadioButton t12=new JRadioButton("12");
+        JRadioButton t16=new JRadioButton("16");
+        JRadioButton t20=new JRadioButton("20");
+        JRadioButton t24=new JRadioButton("24");
+
+        grupoTamagno.add(t12);
+        grupoTamagno.add(t16);
+        grupoTamagno.add(t20);
+        grupoTamagno.add(t24);
+
+        t12.addActionListener(new StyledEditorKit.FontSizeAction("",12));
+        t16.addActionListener(new StyledEditorKit.FontSizeAction("",16));
+        t20.addActionListener(new StyledEditorKit.FontSizeAction("",20));
+        t24.addActionListener(new StyledEditorKit.FontSizeAction("",24));
+
+        tamagno.add(t12);
+        tamagno.add(t16);
+        tamagno.add(t20);
+        tamagno.add(t24);
 
         barra.add(fuente);
         barra.add(estilo);
@@ -68,33 +99,20 @@ class PanelProcesador extends JPanel{
     el primer argumento hace referencia al tipo de letra("arail,courier,verdana"),el segundo argumento a el menu del cual
     va a corgar,el tercero al a la referencia si es negrita o cursiva y por ultimo el tamaño
      */
-    public void configuraMenu(String rotulo,String menu,String tipoLetra,int estilos,int tan){
-        JMenuItem elemMenu=new JMenuItem(rotulo);
-        if (menu=="Fuente"){
+    public void configuraMenu(String rotulo,String menu,String tipoLetra,int estilos,int tan,String rutaIcono){
+        JMenuItem elemMenu=new JMenuItem(rotulo,new ImageIcon(rutaIcono));
+        if (menu=="Fuente") {
             fuente.add(elemMenu);
 
-            if (tipoLetra=="Arial"){
-                elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("","Arial"));
-            }else if (tipoLetra=="Courier"){
-                elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("","Courier"));
-            }
-            else if (tipoLetra=="Verdana"){
-                elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("","Verdana"));
-            }
-
-        } else if (menu=="Estilo") {
-            estilo.add(elemMenu);
-            if (estilos==Font.BOLD) {
-                elemMenu.addActionListener(new StyledEditorKit.BoldAction());
-            } else if (estilos==Font.ITALIC) {
-                elemMenu.addActionListener(new StyledEditorKit.ItalicAction());
+            if (tipoLetra == "Arial") {
+                elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("", "Arial"));
+            } else if (tipoLetra == "Courier") {
+                elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("", "Courier"));
+            } else if (tipoLetra == "Verdana") {
+                elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("", "Verdana"));
             }
 
-        }else if(menu=="Tamaño"){
-            tamagno.add(elemMenu);
-            elemMenu.addActionListener(new StyledEditorKit.FontSizeAction("",tan));
         }
-
     }
 
 
