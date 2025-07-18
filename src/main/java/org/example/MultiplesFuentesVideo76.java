@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
-public class MultiplesFuentes {
+public class MultiplesFuentesVideo76 {
     public static void main(String[] args) {
         MarcoAccion miMarco=new MarcoAccion();
         miMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

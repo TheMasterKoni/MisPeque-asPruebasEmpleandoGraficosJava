@@ -3,9 +3,10 @@ package org.example.graficos;
 import javax.swing.*;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-/*Pracica guida: video 101,102,103,104 y 105
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+/*Pracica guida: video 101,102,103,104 .... video 114 y 115
 
  */
 public class Video101ProcesadorTxt {
@@ -17,7 +18,7 @@ public class Video101ProcesadorTxt {
 class MarcoProcesador extends JFrame{
     public MarcoProcesador(){
         setTitle("KoniWord");
-        setBounds(440,250,600,500);
+        setBounds(440,250,600,540);
         PanelProcesador miProcesaro=new PanelProcesador();
         add(miProcesaro);
         setVisible(true);
@@ -38,30 +39,17 @@ class PanelProcesador extends JPanel{
         configuraMenu("verdana","Fuente","Verdana",9,10,"");
         //----------------------------------------------------------------------
 
-       // configuraMenu("Negrita","Estilo","",Font.BOLD,10,"rojo.jpg");
-        //configuraMenu("Cursiva","Estilo","",Font.ITALIC,10,"Azul.jpg");
-
-        JCheckBoxMenuItem negrita=new JCheckBoxMenuItem("negrita",new ImageIcon("main/java/org/example/graficos/grial.jpg"));
-        JCheckBoxMenuItem cursica=new JCheckBoxMenuItem("Cursiva",new ImageIcon("main/java/org/example/graficos/saber.jpg"));
-
-        negrita.addActionListener(new StyledEditorKit.BoldAction());
-        cursica.addActionListener(new StyledEditorKit.ItalicAction());
-
-        estilo.add(negrita);
-        estilo.add(cursica);
-        //----------------------------------------------------------------------
-        //valor 9 no coresponde a nada valor 1 corresponder a negrita
-       /* configuraMenu("12","Tamaño","",9,12,"");
-        configuraMenu("16","Tamaño","",9,16,"");
-        configuraMenu("20","Tamaño","",9,20,"");
-        configuraMenu("24","Tamaño","",9,24,"");*/
+          configuraMenu("Negrita","Estilo","",Font.BOLD,10,"rojo.jpg");
+          configuraMenu("Cursiva","Estilo","",Font.ITALIC,10,"Azul.jpg");
 
         ButtonGroup grupoTamagno=new ButtonGroup();
 
-        JRadioButton t12=new JRadioButton("12");
-        JRadioButton t16=new JRadioButton("16");
-        JRadioButton t20=new JRadioButton("20");
-        JRadioButton t24=new JRadioButton("24");
+        JRadioButtonMenuItem t12=new JRadioButtonMenuItem("12");
+        JRadioButtonMenuItem t16=new JRadioButtonMenuItem("16");
+        JRadioButtonMenuItem t20=new JRadioButtonMenuItem("20");
+        JRadioButtonMenuItem t24=new JRadioButtonMenuItem("24");
+
+        t12.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
 
         grupoTamagno.add(t12);
         grupoTamagno.add(t16);
@@ -94,31 +82,81 @@ class PanelProcesador extends JPanel{
         area=new JTextPane();
         add(area,BorderLayout.CENTER);
         add(panelDerecha,BorderLayout.EAST);
+
+
+        JPopupMenu emergente=new JPopupMenu();
+        JCheckBoxMenuItem menu1=new JCheckBoxMenuItem("negrita");
+        menu1.addActionListener(new StyledEditorKit.BoldAction());
+        JCheckBoxMenuItem menu2=new JCheckBoxMenuItem("cursiva");
+        menu2.addActionListener(new StyledEditorKit.ItalicAction());
+
+        emergente.add(menu1);
+        emergente.add(menu2);
+        area.setComponentPopupMenu(emergente);
+
+        bar=new JToolBar();
+        gestionaBarra("rojo.jpg").addActionListener(new StyledEditorKit.BoldAction());
+        gestionaBarra("Amarillo.jpg").addActionListener(new StyledEditorKit.ItalicAction());
+        bar.addSeparator();
+        gestionaBarra("Azul.jpg").addActionListener(new StyledEditorKit.AlignmentAction("izquirda",0));
+        gestionaBarra("Amarillo.jpg").addActionListener(new StyledEditorKit.AlignmentAction("centrado",1));
+        gestionaBarra("Azul.jpg").addActionListener(new StyledEditorKit.AlignmentAction("derecha",2));
+        gestionaBarra("rojo.jpg").addActionListener(new StyledEditorKit.AlignmentAction("justificado",3));
+        bar.addSeparator();
+        gestionaBarra("Azul.jpg").addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.BLUE));
+        gestionaBarra("rojo.jpg").addActionListener(new StyledEditorKit.ForegroundAction("rojo",Color.RED));
+        gestionaBarra("Amarillo.jpg").addActionListener(new StyledEditorKit.ForegroundAction("Amarillo",Color.YELLOW));
+        bar.setOrientation(1);
+        add(bar,BorderLayout.WEST);
+    }
+    public JButton gestionaBarra(String ruta){
+        JButton boton=new JButton(new ImageIcon(ruta));
+        bar.add(boton);
+        return boton;
     }
     /* metodo que nos permite,agregar los Item a sus menus de una manera mas optimizada y eficas
     el primer argumento hace referencia al tipo de letra("arail,courier,verdana"),el segundo argumento a el menu del cual
     va a corgar,el tercero al a la referencia si es negrita o cursiva y por ultimo el tamaño
      */
-    public void configuraMenu(String rotulo,String menu,String tipoLetra,int estilos,int tan,String rutaIcono){
-        JMenuItem elemMenu=new JMenuItem(rotulo,new ImageIcon(rutaIcono));
-        if (menu=="Fuente") {
+    public void configuraMenu(String rotulo, String menu, String tipoLetra, int estilos, int tan, String rutaIcono) {
+        JMenuItem elemMenu = new JMenuItem(rotulo, new ImageIcon(rutaIcono));
+
+        // Verifica si es el menú Fuente
+        if (menu.equals("Fuente")) {
             fuente.add(elemMenu);
 
-            if (tipoLetra == "Arial") {
+            if (tipoLetra.equals("Arial")) {
                 elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("", "Arial"));
-            } else if (tipoLetra == "Courier") {
+            } else if (tipoLetra.equals("Courier")) {
                 elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("", "Courier"));
-            } else if (tipoLetra == "Verdana") {
+            } else if (tipoLetra.equals("Verdana")) {
                 elemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("", "Verdana"));
             }
+        }
 
+        // Verifica si es el menú Estilo
+        else if (menu.equals("Estilo")) {
+            estilo.add(elemMenu);
+
+            if (estilos == Font.BOLD) {
+                elemMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+                elemMenu.addActionListener(new StyledEditorKit.BoldAction());
+            } else if (estilos == Font.ITALIC) {
+                elemMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
+                elemMenu.addActionListener(new StyledEditorKit.ItalicAction());
+            }
+        }
+
+        // Verifica si es el menú Tamaño (si decides usarlo más adelante)
+        else if (menu.equals("Tamaño")) {
+            tamagno.add(elemMenu);
+            elemMenu.addActionListener(new StyledEditorKit.FontSizeAction("", tan));
         }
     }
 
-
-
     private JTextPane area;
     JMenu fuente,estilo,tamagno;
-    Font letras;
     private JLabel getSout;
+    JButton nBar,cBar,subBar,azulBar,rojoBar,AmarilloBar,izquierda,centrado,derecha,justificado;
+    JToolBar bar;
 }
