@@ -2,7 +2,6 @@ package POO;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 public class Uso_Empleado {
     public static void main(String[] args) {
         jefatura jefe_RRHH=new jefatura("juan",55000,2006,9,25);
@@ -45,7 +44,7 @@ public class Uso_Empleado {
         }
     }
 }
-    class Empleado implements Comparable,Trabajadores {
+     class Empleado implements Comparable,Trabajadores {
         public Empleado(String nom, double sue, int agno, int mes, int dia) {
             nombre = nom;
             sueldo = sue;

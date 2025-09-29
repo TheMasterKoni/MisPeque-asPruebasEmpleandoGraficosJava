@@ -5,12 +5,20 @@ public class LaminaBotones extends JPanel{
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),titulo));//createEtchedBorder se utiliza para crear un borde con efecto de grabado en componentes de la interfaz gráfica de usuario (GUI
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-        ButtonGroup agrupador=new ButtonGroup();
+        agrupador=new ButtonGroup();
         for (int i=0;i<opciones.length;i++){
             JRadioButton btn=new JRadioButton(opciones[i]);
+            btn.setActionCommand(opciones[i]);
             add(btn);
             agrupador.add(btn);
             btn.setSelected(i==0);
         }
     }
+    public String getSeleccion(){
+      ButtonModel btn=agrupador.getSelection();
+      String s=btn.getActionCommand();
+      return s;
+      //return agrupador.getSelection().getActionCommand(); tembien se puede de esta manera
+    }
+    ButtonGroup agrupador;
 }
