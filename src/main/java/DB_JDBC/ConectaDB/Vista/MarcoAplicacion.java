@@ -1,9 +1,14 @@
 package DB_JDBC.ConectaDB.Vista;
 
+import DB_JDBC.ConectaDB.controlador.ControladorBotonEjecuta;
+import DB_JDBC.ConectaDB.controlador.ControladorCargaSecciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
+
 public class MarcoAplicacion extends JFrame {
 
     public MarcoAplicacion() {
@@ -50,8 +55,13 @@ public class MarcoAplicacion extends JFrame {
 
         add(botonConsulta,BorderLayout.SOUTH);
 
+      //  botonConsulta.addActionListener(new ControladorBotonEjecuta(this));
+
+       addWindowListener(new ControladorCargaSecciones(this));
+
+
     }
-    private JComboBox secciones;
+    public JComboBox secciones;
 
     private JComboBox paises;
 
