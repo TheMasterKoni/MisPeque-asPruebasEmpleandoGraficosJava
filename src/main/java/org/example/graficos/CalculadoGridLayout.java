@@ -108,9 +108,17 @@ class PanelCalculadora extends JPanel{
             display.setText(""+resultado);//las comillas tambien nos convierten el double en String
         }
     }
+        
     private  JPanel miLamina2;
     private JButton display;
     private boolean principio=true;
     private double resultado;//campo de clase que nos permitira acceder/guardar las operaciones que vamos realizando
     private String ultimaOperacion;
+}
+class pruba extens JFrame{
+    public prueba(){
+                setBouns(400,250,400,500);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
 }
